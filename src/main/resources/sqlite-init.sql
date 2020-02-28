@@ -14,6 +14,7 @@ create table if not exists words
     id          integer primary key autoincrement,
     value       varchar(100),
     annotation  varchar(255),
+    mark        integer,
     create_time datetime,
     update_time datetime
 
@@ -25,6 +26,14 @@ create table if not exists notes
     word_id     integer,
     value       varchar(255),
     'index'     integer,
+    create_time datetime,
+    update_time datetime
+);
+
+create table if not exists marks
+(
+    id          integer primary key autoincrement,
+    word_id     integer,
     create_time datetime,
     update_time datetime
 )

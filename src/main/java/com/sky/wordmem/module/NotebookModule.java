@@ -1,7 +1,9 @@
 package com.sky.wordmem.module;
 
+import com.sky.wordmem.dao.MarkDao;
 import com.sky.wordmem.dao.NoteDao;
 import com.sky.wordmem.dao.WordDao;
+import com.sky.wordmem.entity.MarkEntity;
 import com.sky.wordmem.entity.NoteEntity;
 import com.sky.wordmem.entity.WordEntity;
 import com.sky.wordmem.utils.CommonUtil;
@@ -27,6 +29,8 @@ public class NotebookModule {
     WordDao wordDao;
     @Autowired
     NoteDao noteDao;
+    @Autowired
+    private MarkDao markDao;
 
     public int writeNoteUnderWord(WordEntity word, String note) {
         Long wordId = word.getId();
@@ -47,6 +51,11 @@ public class NotebookModule {
             }
         }
         return deletedId;
+    }
+
+    public int markWord(WordEntity word){
+        Long wordId = word.getId();
+        return markDao.insert(MarkEntity.builder().wordId(wordId).build());
     }
 
     public List<NoteEntity> todayNotes() {

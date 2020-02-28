@@ -123,6 +123,10 @@ public class App implements CommandLineRunner {
                 }
                 SearchResponse res = dict.searchWord(query);
                 dict.render(res);
+            }else if ("m".equals(s)){
+                WordEntity word = words.get(cursor);
+                notebook.markWord(word);
+                screen.render(word);
             }
             else {
                 history.add(cursor);

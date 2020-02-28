@@ -30,4 +30,13 @@ create table if not exists notes
     'index'     integer,
     create_time datetime,
     update_time datetime
+);
+
+drop table if exists marks;
+create table if not exists marks
+(
+    id          integer primary key autoincrement,
+    word_id     integer,
+    create_time datetime,
+    update_time datetime
 )
