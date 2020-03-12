@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author sikaizhang@xiaohongshu.com
@@ -69,10 +70,24 @@ public class TestDaoTest extends UnitTest {
             assert DatetimeUtil.dateToString(
                     n.getUpdateTime()).equals(DatetimeUtil.dateToString(new Date()));
         }
-
-
         noteDao.delete(id);
         noteEntity = noteDao.select(id);
         assert null == noteEntity;
+    }
+
+    @Test
+    public void testMetaDao(){
+        String a = metaDao.getLastCursor().get(0);
+        int v = Integer.parseInt(a) + 1;
+        metaDao.preserveCursor(v);
+        assert Integer.parseInt(metaDao.getLastCursor().get(0)) == v;
+    }
+
+    @Test
+    public void testReindexNotes(){
+//        reindexNotes.run();
+//        List<WordEntity> res = notebook.searchNotes("haha");
+//        log.info(String.format("the words with first in it:  %s",
+//                res.stream().map(WordEntity::getValue).collect(Collectors.toList())));
     }
 }

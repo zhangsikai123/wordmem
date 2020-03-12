@@ -2,10 +2,14 @@ package com.sky;
 
 import com.sky.wordmem.App;
 import com.sky.wordmem.adaptor.dictAdaptor.DictAdaptor;
-import com.sky.wordmem.adaptor.dictAdaptor.MarriamWebster;
+import com.sky.wordmem.config.Lucene;
+import com.sky.wordmem.dao.MetaDao;
 import com.sky.wordmem.dao.NoteDao;
 import com.sky.wordmem.dao.TestDao;
 import com.sky.wordmem.dao.WordDao;
+import com.sky.wordmem.module.NotebookModule;
+import com.sky.wordmem.script.ReindexNotes;
+import com.sky.wordmem.utils.ReadWriteUtil;
 import com.sky.wordmem.utils.RequestUtil;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +43,12 @@ public abstract class UnitTest {
     public RequestUtil requestUtil;
     @Autowired
     public DictAdaptor marriamWebster;
+    @Autowired
+    public NotebookModule notebook;
+    @Autowired
+    public ReindexNotes reindexNotes;
+    @Autowired
+    public Lucene lucene;
+    @Autowired
+    public MetaDao metaDao;
 }

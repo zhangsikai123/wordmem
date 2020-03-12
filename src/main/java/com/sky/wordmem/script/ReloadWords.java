@@ -40,7 +40,7 @@ public class ReloadWords implements Runnable {
             for (List<String> row : sheet) {
                 String value = row.get(0);
                 String annotation = row.get(1);
-                WordEntity data = WordEntity.builder().annotation(annotation).value(value).build();
+                WordEntity data = WordEntity.builder().annotation(annotation.trim()).value(value.trim()).build();
                 wordDao.insert(data);
                 log.info(String.format("%s/%s", count, total));
                 count++;

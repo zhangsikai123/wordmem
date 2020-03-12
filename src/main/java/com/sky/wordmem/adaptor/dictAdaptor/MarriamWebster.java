@@ -9,10 +9,12 @@ import com.sky.wordmem.module.ScreenModule;
 import com.sky.wordmem.utils.RequestUtil;
 import javafx.stage.Screen;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
+import java.util.concurrent.Executors;
 
 /**
  * @author sikaizhang@xiaohongshu.com
@@ -34,7 +36,7 @@ public class MarriamWebster implements DictAdaptor {
     @Override
     public SearchResponse searchWord(String query) {
         String url = String.format(SCHEMA, COLLEGIATE, query, KEY);
-        JSONArray response = requestUtil.get(url).getJSONArray("data");
+        JSONArray response = requestUtil.get2(url).getJSONArray("data");
         SearchResponse resBuilder = new SearchResponse();
 
         // 找第一个策略

@@ -37,7 +37,7 @@ public interface WordDao {
     List<WordEntity> selectAllOrdered();
 
     // 更新 value
-    @Update("UPDATE words SET value=#{value} WHERE id=#{id}")
+    @Update("UPDATE words SET value=#{value}, annotation=#{annotation} WHERE id=#{id}")
     int updateValue(WordEntity model);
 
     // 根据 ID 删除

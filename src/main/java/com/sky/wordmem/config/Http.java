@@ -1,5 +1,6 @@
 package com.sky.wordmem.config;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.Registry;
@@ -9,13 +10,13 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * @author sikaizhang@xiaohongshu.com
@@ -48,14 +49,24 @@ public class Http {
 }
 
     @Bean
-    public ClientHttpRequestFactory httpRequestFactory() {
-        return new HttpComponentsClientHttpRequestFactory(httpClient());
+    public ClientHttpRequestFactory httpRequestFactory(HttpClient httpClient) {
+        HttpComponentsClientHttpRequestFactory fac = new HttpComponentsClientHttpRequestFactory(httpClient);
+        return fac;
     }
 
     @Bean
     public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
+
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
         return restTemplate;
     }
 
+    @Bean
+    public WebClient getWebClient(){
+        WebClient client = WebClient
+                .builder()
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+        return client;
+    }
 }

@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface DictAdaptor {
 
-    public SearchResponse searchWord(String query);
+    SearchResponse searchWord(String query);
 
-    public void render(SearchResponse response);
+    void render(SearchResponse response);
 }
 

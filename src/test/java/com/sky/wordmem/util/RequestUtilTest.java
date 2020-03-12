@@ -1,13 +1,7 @@
 package com.sky.wordmem.util;
-
-import com.alibaba.fastjson.JSONObject;
 import com.sky.UnitTest;
-import com.sky.wordmem.adaptor.dictAdaptor.MarriamWebster;
 import com.sky.wordmem.adaptor.dictAdaptor.vo.SearchResponse;
-import com.sky.wordmem.utils.RequestUtil;
 import org.junit.Test;
-
-import java.util.Scanner;
 
 /**
  * @author sikaizhang@xiaohongshu.com
@@ -19,7 +13,8 @@ public class RequestUtilTest extends UnitTest {
 
     @Test
     public void test() {
-        Scanner scanner = new Scanner(System.in);
+//        JSONObject ret = requestUtil.get2("https://www.baidu.com");
+//        System.out.println(ret);
         SearchResponse response = marriamWebster.searchWord("word");
         marriamWebster.render(response);
     }

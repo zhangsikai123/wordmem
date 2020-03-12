@@ -1,8 +1,6 @@
 package com.sky.wordmem.config;
-import com.sky.wordmem.utils.ReaderUtil;
+import com.sky.wordmem.utils.ReadWriteUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +41,7 @@ public class Database{
 
     private void init(DataSource dataSource){
         try {
-            String initSql = ReaderUtil.readFile("sqlite-init.sql");
+            String initSql = ReadWriteUtil.readFile("sqlite-init.sql");
             Statement statement = dataSource.getConnection().createStatement();
             String[] sqls = initSql.split(";");
             for (String sql : sqls) {

@@ -1,5 +1,7 @@
 package com.sky.wordmem.utils;
 
+import com.sky.wordmem.handlers.Handler;
+import lombok.Data;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -8,6 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author sikaizhang@xiaohongshu.com

@@ -37,13 +37,15 @@ public class ScreenModule {
 
 
     public void render(WordEntity word) {
+        if(word == null){
+            System.out.println("NULL");;
+            return;
+        }
         String schema = "%s\n笔记:\n%s \n释义: %s";
         List<NoteEntity> notes = noteDao.selectByWordIdOrderByIndex(word.getId());
         StringBuilder noteStr = new StringBuilder();
-        int indexView = 0;
         for (NoteEntity note : notes) {
-            noteStr.append("    ").append(indexView).append(": ").append(note.toString()).append("\n");
-            indexView++;
+            noteStr.append("    ").append(note.getIndex()).append(": ").append(note.toString()).append("\n");
         }
 
         StringBuilder wordValue = new StringBuilder(word.getValue());

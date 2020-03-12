@@ -1,6 +1,12 @@
 package com.sky.wordmem.module;
 
+import com.sky.wordmem.adaptor.dictAdaptor.DictAdaptor;
+import com.sky.wordmem.adaptor.dictAdaptor.vo.SearchResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.concurrent.Executors;
 
 /**
  * @author sikaizhang@xiaohongshu.com
@@ -10,8 +16,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class DictionaryModule {
 
+    @Autowired
+    ScreenModule screen;
+    @Resource
+    DictAdaptor marriamWebster;
 
-    public Object search(String word){
-        return null;
+    public void searchAndRender(String word) {
+        Executors.newSingleThreadExecutor().submit(()->{
+            SearchResponse response = marriamWebster.searchWord(word);
+            screen.render("==============================================");
+            marriamWebster.render(response);
+            screen.render("==============================================");
+        });
     }
 }

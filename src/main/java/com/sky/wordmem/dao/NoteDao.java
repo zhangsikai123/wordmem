@@ -18,7 +18,7 @@ public interface NoteDao {
     // 插入 并查询id 赋给传入的对象
     @Insert("INSERT INTO notes(value, word_id, 'index', create_time, update_time) VALUES(#{value}, #{wordId}, #{index}, #{createTime}, #{updateTime})")
     @Options(useGeneratedKeys=true)
-    int insert(NoteEntity model);
+    Long insert(NoteEntity model);
 
     // 根据 ID 查询
     @Select("SELECT * FROM notes WHERE id=#{id}")
@@ -32,9 +32,10 @@ public interface NoteDao {
     @Select("SELECT * FROM notes where word_id=#{wordId} order by 'index'")
     List<NoteEntity> selectByWordIdOrderByIndex(Long wordId);
 
-    // 根据日期查询  [a, b]
-    @Select("SELECT * FROM notes where update_time between #{begin} and #{end}")
+    // 根据日期查询  [a, b] 根据 id 排序
+    @Select("SELECT * FROM notes where update_time between #{begin} and #{end} order by id")
     List<NoteEntity> selectByDatetime(long begin, long end);
+
 
 //    // 根据日期查询 [a, b)
 //    @Select("SELECT * FROM notes where update_time between #{begin} and #{end}")

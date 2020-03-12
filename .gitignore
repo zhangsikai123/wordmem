@@ -5,7 +5,8 @@ target/
 !**/src/test/**
 ### sqlite ###
 memory*
-
+### lucene ###
+lucene*
 ### STS ###
 .apt_generated
 .classpath

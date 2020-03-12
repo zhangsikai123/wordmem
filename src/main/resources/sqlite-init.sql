@@ -36,4 +36,15 @@ create table if not exists marks
     word_id     integer,
     create_time datetime,
     update_time datetime
-)
+);
+
+create table if not exists meta
+(
+    id          integer primary key autoincrement,
+    name        varchar(255) unique,
+    value       varchar(255),
+    create_time datetime,
+    update_time datetime
+);
+
+insert into meta ('name', 'value') values ('cursor', '0')
